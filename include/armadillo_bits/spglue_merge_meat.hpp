@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -20,7 +22,6 @@
 
 
 template<typename eT>
-arma_hot
 inline
 void
 spglue_merge::subview_merge(SpSubview<eT>& sv, const SpMat<eT>& B)
@@ -193,7 +194,6 @@ spglue_merge::subview_merge(SpSubview<eT>& sv, const SpMat<eT>& B)
 
 
 template<typename eT>
-arma_hot
 inline
 void
 spglue_merge::subview_merge(SpSubview<eT>& sv, const Mat<eT>& B)
@@ -381,7 +381,6 @@ spglue_merge::subview_merge(SpSubview<eT>& sv, const Mat<eT>& B)
 
 
 template<typename eT>
-arma_hot
 inline
 void
 spglue_merge::symmat_merge(SpMat<eT>& out, const SpMat<eT>& A, const SpMat<eT>& B)
@@ -466,7 +465,6 @@ spglue_merge::symmat_merge(SpMat<eT>& out, const SpMat<eT>& A, const SpMat<eT>& 
 
 
 template<typename eT>
-arma_hot
 inline
 void
 spglue_merge::diagview_merge(SpMat<eT>& out, const SpMat<eT>& A, const SpMat<eT>& B)

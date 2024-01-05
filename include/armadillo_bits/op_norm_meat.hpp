@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+// 
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
 // 
@@ -20,7 +22,6 @@
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_1(const Proxy<T1>& P, const typename arma_not_cx<typename T1::elem_type>::result* junk)
@@ -107,7 +108,6 @@ op_norm::vec_norm_1(const Proxy<T1>& P, const typename arma_not_cx<typename T1::
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_1(const Proxy<T1>& P, const typename arma_cx_only<typename T1::elem_type>::result* junk)
@@ -215,7 +215,6 @@ op_norm::vec_norm_1(const Proxy<T1>& P, const typename arma_cx_only<typename T1:
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 op_norm::vec_norm_1_direct_std(const Mat<eT>& X)
@@ -250,14 +249,13 @@ op_norm::vec_norm_1_direct_std(const Mat<eT>& X)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 op_norm::vec_norm_1_direct_mem(const uword N, const eT* A)
   {
   arma_extra_debug_sigprint();
   
-  #if defined(ARMA_SIMPLE_LOOPS) || (defined(__FINITE_MATH_ONLY__) && (__FINITE_MATH_ONLY__ > 0))
+  #if (defined(ARMA_SIMPLE_LOOPS) || defined(__FAST_MATH__))
     {
     eT acc1 = eT(0);
     
@@ -303,7 +301,6 @@ op_norm::vec_norm_1_direct_mem(const uword N, const eT* A)
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_2(const Proxy<T1>& P, const typename arma_not_cx<typename T1::elem_type>::result* junk)
@@ -411,7 +408,6 @@ op_norm::vec_norm_2(const Proxy<T1>& P, const typename arma_not_cx<typename T1::
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_2(const Proxy<T1>& P, const typename arma_cx_only<typename T1::elem_type>::result* junk)
@@ -514,7 +510,6 @@ op_norm::vec_norm_2(const Proxy<T1>& P, const typename arma_cx_only<typename T1:
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 op_norm::vec_norm_2_direct_std(const Mat<eT>& X)
@@ -562,7 +557,6 @@ op_norm::vec_norm_2_direct_std(const Mat<eT>& X)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 op_norm::vec_norm_2_direct_mem(const uword N, const eT* A)
@@ -571,7 +565,7 @@ op_norm::vec_norm_2_direct_mem(const uword N, const eT* A)
   
   eT acc;
   
-  #if defined(ARMA_SIMPLE_LOOPS) || (defined(__FINITE_MATH_ONLY__) && (__FINITE_MATH_ONLY__ > 0))
+  #if (defined(ARMA_SIMPLE_LOOPS) || defined(__FAST_MATH__))
     {
     eT acc1 = eT(0);
     
@@ -621,7 +615,6 @@ op_norm::vec_norm_2_direct_mem(const uword N, const eT* A)
 
 
 template<typename eT>
-arma_hot
 inline
 eT
 op_norm::vec_norm_2_direct_robust(const Mat<eT>& X)
@@ -686,7 +679,6 @@ op_norm::vec_norm_2_direct_robust(const Mat<eT>& X)
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_k(const Proxy<T1>& P, const int k)
@@ -736,7 +728,6 @@ op_norm::vec_norm_k(const Proxy<T1>& P, const int k)
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_max(const Proxy<T1>& P)
@@ -802,7 +793,6 @@ op_norm::vec_norm_max(const Proxy<T1>& P)
 
 
 template<typename T1>
-arma_hot
 inline
 typename T1::pod_type
 op_norm::vec_norm_min(const Proxy<T1>& P)
@@ -889,7 +879,7 @@ op_norm::mat_norm_2(const Mat<eT>& X)
   
   typedef typename get_pod_type<eT>::result T;
   
-  if(X.is_finite() == false)  { arma_debug_warn_level(1, "norm(): given matrix has non-finite elements"); }
+  if(X.internal_has_nonfinite())  { arma_debug_warn_level(1, "norm(): given matrix has non-finite elements"); }
   
   Col<T> S;
   svd(S, X);
