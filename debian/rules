@@ -27,7 +27,7 @@ clean:
 	rm -f CMakeCache.txt cmake_install.cmake
 	rm -rf CMakeFiles
 	rm -f install_manifest.txt include/armadillo_bits/config.hpp examples/Makefile
-	rm -f ArmadilloConfig.cmake ArmadilloConfigVersion.cmake 
+	rm -f ArmadilloConfig.cmake ArmadilloConfigVersion.cmake
 	rm -rf InstallFiles tmp *.o a.out
 	dh_clean  --exclude ./src/include/armadillo_bits/dgemm_proto.hpp.orig
 
